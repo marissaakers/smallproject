@@ -9,10 +9,6 @@ mongoose.connect('mongodb+srv://ryan:contactmanagerpw@contact-manager-ptzoy.mong
   useNewUrlParser: true
 })
 
-mongoose.connect('mongodb+srv://ryan:contactmanagerpw@contact-manager-ptzoy.mongodb.net/test?retryWrites=true&w=majority',{
-  useNewUrlParser: true
-})
-
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
