@@ -9,8 +9,6 @@ mongoose.connect('mongodb+srv://ryan:contactmanagerpw@contact-manager-ptzoy.mong
   useNewUrlParser: true
 })
 
-const config = require('./config')
-
 mongoose.connect('mongodb+srv://ryan:contactmanagerpw@contact-manager-ptzoy.mongodb.net/test?retryWrites=true&w=majority',{
   useNewUrlParser: true
 })
