@@ -50,4 +50,19 @@ router.post('/create-contact', function(req, res) {
   })
 })
 
+router.delete('/:id', function(req, res) {
+  Contact.findByIdAndDelete(req.params.id)
+  .exec()
+  .then(() => {
+    res.status(200).json({
+      message: 'Contact deleted.'
+    })
+  })
+  .catch(err => {
+    res.status(500).json({
+      message: err
+    })
+  })
+})
+
 module.exports = router
