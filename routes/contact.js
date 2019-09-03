@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken')
 
 const Contact = require('../models/contactModel')
 
+// Get all users from the data base that are under the user who is currently logged in (done with jsonwebtokens)
 router.get('/', function(req, res) {
   const decoded = jwt.decode(req.headers.authorization.split(" ")[1])
 
@@ -19,6 +20,7 @@ router.get('/', function(req, res) {
   })
 })
 
+// Search for one contact in specific based off the contact name provided
 router.get('/search', function(req, res) {
   Contact.findOne({name: req.body.searchName})
   .exec()
@@ -30,6 +32,7 @@ router.get('/search', function(req, res) {
   })
 })
 
+// Create a contact with owner information being passed by the jwt, post to database
 router.post('/create-contact', function(req, res) {
   const decoded = jwt.decode(req.headers.authorization.split(" ")[1])
 
@@ -50,6 +53,7 @@ router.post('/create-contact', function(req, res) {
   })
 })
 
+// Find and delete contact with id given by the url
 router.delete('/:id', function(req, res) {
   Contact.findByIdAndDelete(req.params.id)
   .exec()
