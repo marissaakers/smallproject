@@ -1,15 +1,14 @@
 const express = require('express')
 const router = express()
 const mongoose = require('mongoose')
-const jwt = require('jsonwebtoken')
 
 const Contact = require('../models/contactModel')
+const auth = require('../middleware/authorize')
 
 // Get all users from the data base that are under the user who is currently logged in (done with jsonwebtokens)
-router.get('/', function(req, res) {
-  const decoded = jwt.decode(req.headers.authorization.split(" ")[1])
-
-  Contact.find({owner: decoded.userId})
+router.get('/', auth, function(req, res) {
+  console.log(req.userData)
+  Contact.find({owner: req.userData.userId})
   .populate('owner', 'username')
   .exec()
   .then(contacts => {
@@ -21,7 +20,7 @@ router.get('/', function(req, res) {
 })
 
 // Search for one contact in specific based off the contact name provided
-router.get('/search', function(req, res) {
+router.get('/search', auth, function(req, res) {
   Contact.findOne({name: req.body.searchName})
   .exec()
   .then(contact => {
@@ -33,15 +32,13 @@ router.get('/search', function(req, res) {
 })
 
 // Create a contact with owner information being passed by the jwt, post to database
-router.post('/create-contact', function(req, res) {
-  const decoded = jwt.decode(req.headers.authorization.split(" ")[1])
-
+router.post('/create-contact', auth, function(req, res) {
   const contact = new Contact({
     _id: new mongoose.Types.ObjectId(),
     name: req.body.name,
     number: req.body.number,
     email: req.body.email,
-    owner: decoded.userId
+    owner: req.userData.userId
   })
 
   Contact.create(contact, (err, contact) => {
@@ -54,7 +51,7 @@ router.post('/create-contact', function(req, res) {
 })
 
 // Find and delete contact with id given by the url
-router.delete('/:id', function(req, res) {
+router.delete('/:id', auth, function(req, res) {
   Contact.findByIdAndDelete(req.params.id)
   .exec()
   .then(() => {

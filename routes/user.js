@@ -54,7 +54,7 @@ router.post('/login', function(req, res) {
     bcrypt.compare(req.body.password, user.password, (err, same) => {
       if(err) {
         res.status(401).json({
-          message: 'Auth failed...'
+          message: 'Auth failed.'
         })
       } else if(same) {
         const token = jwt.sign({
@@ -67,19 +67,19 @@ router.post('/login', function(req, res) {
         })
 
         res.status(200).json({
-          message: 'Auth successul...',
+          message: 'Auth successul.',
           token: token
         })
       } else {
         res.status(401).json({
-          message: 'Auth failed...'
+          message: 'Auth failed.'
         })
       }
     })
   })
   .catch(() => {
     res.status(401).json({
-      message: 'Auth failed...'
+      message: 'Auth failed.'
     })
   })
 })
@@ -90,7 +90,7 @@ router.delete('/:id', function(req, res) {
   .exec()
   .then(() => {
     res.status(200).json({
-      message: 'User deleted...'
+      message: 'User deleted.'
     })
   })
   .catch(err => {
