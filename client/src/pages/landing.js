@@ -5,9 +5,11 @@ class Landing extends Component {
   render() {
     return(
       <div style={styling.mainDiv} >
-        <h1>RYBAMA</h1>
-        <Button style={styling.buttons} >Sign Up</Button>
-        <Button>Login</Button>
+        <h1 style={{margin: '5%'}} >RYBAMA</h1>
+        <div style={styling.buttonDiv}>
+          <Button  style={styling.buttons}>Sign Up</Button>
+          <Button style={styling.buttons} >Login</Button>
+        </div>
       </div>
     )
   }
@@ -18,7 +20,12 @@ const styling = {
     textAlign: 'center'
   },
   buttons: {
-    margin: '50px'
+    margin: '13%'
+  },
+  buttonDiv: {
+    display: 'flex',
+    justifyContent: 'center',
+    
   }
 }
 
