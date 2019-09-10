@@ -31,7 +31,7 @@ const styling = {
   buttonDiv: {
     display: 'flex',
     justifyContent: 'center',
-    border: '1px solid black'
+    // border: '1px solid black'
   }
 }
 
