@@ -11,12 +11,16 @@ class SignUp extends Component {
     }
   }
 
+  onSubmit(e) {
+
+  } 
+
   render() {
     return(
-      <div>
-        <h1>Sign Up</h1>
-        <div>
-        <Form>
+      <div >
+        <h1 style={{margin: '5%'}}>Sign Up</h1>
+        <div style={styling.outerDiv}>
+        <Form style={styling.formDiv}>
           <FormGroup>
             <FormLabel>Username</FormLabel>
             <FormControl type="username" placeholder="username" />
@@ -33,6 +37,17 @@ class SignUp extends Component {
         </div>
       </div>
     )
+  }
+}
+
+const styling = {
+  formDiv: {
+    width: '50%',
+  },
+  outerDiv: {
+    display: 'flex',
+    justifyContent: 'center',
+    margin: '8%'
   }
 }
 
