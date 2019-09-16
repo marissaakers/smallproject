@@ -4,11 +4,16 @@ import { Button } from 'react-bootstrap/'
 import { Redirect } from 'react-router-dom'
 
 class Login extends Component {
+  componentWillMount() {
+    console.log('mounted bih')
+  }
   constructor(props) {
     super(props)
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      jwt: '',
+      redirect: false
     }
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
   }
@@ -35,10 +40,11 @@ class Login extends Component {
       body: JSON.stringify(this.state)
       })
       .then((result) => {
-        console.log(result)
         result.json()
+        JSON.stringify(result)
+        this.setState({jwt: result.token})
       })
-      .then((info) => { console.log(info); })
+      .then(() => {this.setRedirect()})
     } 
 
   setRedirect = () => {
@@ -69,9 +75,10 @@ class Login extends Component {
           </FormGroup>
           <div>
             {this.renderRedirect()}
-            <Button variant="primary" type="submit">
+            <Button variant="primary" onClick={this.onSubmit()} >
               Submit
             </Button>
+            <p>{this.state.jwt}</p>
           </div>
         </Form>
         </div>
