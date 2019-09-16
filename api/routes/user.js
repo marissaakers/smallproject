@@ -36,7 +36,7 @@ router.post('/signup', function(req, res) {
           res.status(500).json(err)
         } else {
           console.log(user)
-          res.status(201).json(user)
+          res.status(201).json({message: `user ${user.username} created.`})
         }
       })
     }

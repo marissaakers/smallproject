@@ -8,9 +8,14 @@ const userRouter = require('./routes/user')
 const contactRouter = require('./routes/contact')
 
 // Connecting to mongo database
-mongoose.connect('mongodb+srv://ryan:contactmanagerpw@contact-manager-ptzoy.mongodb.net/test?retryWrites=true&w=majority',{
-  useNewUrlParser: true
-})
+try{
+    mongoose.connect('mongodb+srv://ryan:contactmanagerpw@contact-manager-ptzoy.mongodb.net/test?retryWrites=true&w=majority',{
+    useNewUrlParser: true
+  })
+} catch(error) {
+  console.log(error)
+}
+
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
