@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
 import { Form, FormControl, FormGroup, FormLabel } from 'react-bootstrap/'
 import { Button } from 'react-bootstrap/'
+import { Redirect } from 'react-router-dom'
 
 class SignUp extends Component {
   constructor(props) {
     super(props)
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      result: '',
+      redirect: false
     }
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
   }
 
   handleUsernameChange = (e) => {
@@ -35,11 +39,25 @@ class SignUp extends Component {
       body: JSON.stringify(this.state)
       })
       .then((result) => {
-        console.log(result)
+        //console.log('result is ' + result)
         result.json()
+        JSON.stringify(result)
+        console.log(result.statusText)
+        this.setState({result: result}) 
       })
-      .then((info) => { console.log(info); })
+      .then(() => {this.setRedirect()})
     } 
+
+  setRedirect = () => {
+    this.setState({
+      redirect: true
+    })
+  }
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to='/users/login' />
+    }
+  }
 
   render() {
     return(
@@ -56,9 +74,13 @@ class SignUp extends Component {
             <FormLabel>Password</FormLabel>
             <Form.Control type="password" placeholder="password" value={this.state.password} onChange={this.handlePasswordChange}/>
           </FormGroup>
-          <Button variant="primary" type="submit" onClick={this.onSubmit}>
-            Submit
-          </Button>
+          <div>
+            {this.renderRedirect()}
+            <Button variant="primary" onClick={this.onSubmit} >
+              Submit
+            </Button>
+          </div>
+          {/* <p>{this.state.result.statusText}</p> */}
         </Form>
         </div>
       </div>
