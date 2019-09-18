@@ -4,9 +4,6 @@ import { Button } from 'react-bootstrap/'
 import { Redirect } from 'react-router-dom'
 
 class Login extends Component {
-  componentWillMount() {
-    console.log('mounted bih')
-  }
   constructor(props) {
     super(props)
     this.state = {
@@ -31,21 +28,35 @@ class Login extends Component {
     console.log(this.state.password)
   }
 
-  onSubmit = (e) => {
-    fetch('http://localhost:3000/users/login' , {
+  postAndFetchData = (path) => {
+    fetch('http://localhost:3000/' + path , {
       method: "POST",
       headers: {
         'Content-type': 'application/json'
       },
       body: JSON.stringify(this.state)
       })
-      .then((result) => {
-        result.json()
-        JSON.stringify(result)
-        this.setState({jwt: result.token})
+      .then(console.log(this.state))
+      .then((response) => {
+        return response.text()
+      })
+      .then((data) => {
+        this.setState({jwt: data.substring(38, data.length - 2)})
+        console.log(this.state.jwt)
       })
       .then(() => {this.setRedirect()})
-    } 
+      .catch(() => {
+        console.log('didnt post')
+      })
+  }
+
+  onSubmit = (e) => {
+    if(e) {
+      console.log("HIT IF")
+      e.preventDefault()
+    }
+    this.postAndFetchData('users/login')
+  }
 
   setRedirect = () => {
     this.setState({
@@ -63,24 +74,24 @@ class Login extends Component {
       <div >
         <h1 style={{margin: '5%'}}>Login</h1>
         <div style={styling.outerDiv}>
-        <Form style={styling.formDiv}>
-          <FormGroup>
-            <FormLabel>Username</FormLabel>
-            <FormControl type="username" placeholder="username" />
-          </FormGroup>
+          <Form style={styling.formDiv}>
+            <FormGroup>
+              <FormLabel>Username</FormLabel>
+              <FormControl type="username" placeholder="username" value={this.state.username} onChange={this.handleUsernameChange} />
+            </FormGroup>
 
-          <FormGroup controlId="formBasicPassword">
-            <FormLabel>Password</FormLabel>
-            <Form.Control type="password" placeholder="password" />
-          </FormGroup>
-          <div>
-            {this.renderRedirect()}
-            <Button variant="primary" onClick={this.onSubmit()} >
-              Submit
-            </Button>
-            <p>{this.state.jwt}</p>
-          </div>
-        </Form>
+            <FormGroup controlId="formBasicPassword">
+              <FormLabel>Password</FormLabel>
+              <Form.Control type="password" placeholder="password"  value={this.state.password} onChange={this.handlePasswordChange}/>
+            </FormGroup>
+            <div>
+              {this.renderRedirect()}
+              <Button variant="primary" onClick={(e) => this.onSubmit()} >
+                Submit
+              </Button>
+              <p>{this.state.jwt}</p>
+            </div>
+          </Form>
         </div>
       </div>
     )

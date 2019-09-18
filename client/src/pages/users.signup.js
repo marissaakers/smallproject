@@ -4,17 +4,20 @@ import { Button } from 'react-bootstrap/'
 import { Redirect } from 'react-router-dom'
 
 class SignUp extends Component {
+
   constructor(props) {
     super(props)
     this.state = {
       username: '',
       password: '',
-      result: '',
+      response: '',
       redirect: false
     }
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
   }
+
+  
 
   handleUsernameChange = (e) => {
     this.setState({
@@ -32,21 +35,21 @@ class SignUp extends Component {
 
   onSubmit = (e) => {
     fetch('http://localhost:3000/users/signup' , {
-      method: "POST",
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify(this.state)
-      })
-      .then((result) => {
-        //console.log('result is ' + result)
-        result.json()
-        JSON.stringify(result)
-        console.log(result.statusText)
-        this.setState({result: result}) 
-      })
-      .then(() => {this.setRedirect()})
-    } 
+    method: "POST",
+    headers: {
+      'Content-type': 'application/json'
+    },
+    body: JSON.stringify(this.state)
+    })
+    .then((response) => {
+      return response.text()
+    })
+    .then((data) => {
+      this.setState({response: data}) 
+      console.log('state: ' + this.state.response)
+    })
+    .then(() => {this.setRedirect()})
+  } 
 
   setRedirect = () => {
     this.setState({
