@@ -7,9 +7,9 @@ class Dashboard extends Component {
     super(props)
     console.log(this.props.location.state)
     this.state = {
-      jwt: this.props.jwt
+      jwt: this.props.location.state.jwt
     }
-    //console.log(this.state.jwt)
+    console.log(this.state.jwt)
   }
   render() {
     return(
@@ -17,9 +17,11 @@ class Dashboard extends Component {
       <h1 style={{margin: '5%'}} >Dashboard</h1>
       <div style={styling.buttonDiv}>
         <Link to="/contacts"><Button style={styling.signup}>Contacts</Button></Link> 
-        <Link to='/contacts/create-contact'><Button style={styling.buttons}>Add Contact</Button></Link>
+        <Link to={{
+          pathname: '/contacts/create-contact',
+          state: { jwt: this.state.jwt }
+        }}><Button style={styling.buttons}>Add Contact</Button></Link>
         <Link to='/contacts/search'><Button style={styling.buttons}>Search</Button></Link>
-        <p>{this.state.jwt}</p>
       </div>
     </div>
     )

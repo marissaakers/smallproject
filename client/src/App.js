@@ -6,6 +6,7 @@ import Login from './pages/users.login'
 // import Dashboard from './pages/dashboard'
 import './App.css';
 import Dashboard from './pages/dashboard';
+import AddContact from './pages/addContact'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path='/users/signup' component={SignUp} />
           <Route path='/users/login' component={Login} />
           <Route path='/users/dashboard' component={Dashboard} />
+          <Route path='/contacts/create-contact' component={AddContact} />
         </Switch>
       </Router>
     </div>
