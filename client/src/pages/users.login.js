@@ -36,7 +36,6 @@ class Login extends Component {
       },
       body: JSON.stringify(this.state)
       })
-      .then(console.log(this.state))
       .then((response) => {
         return response.text()
       })
@@ -65,7 +64,11 @@ class Login extends Component {
   }
   renderRedirect = () => {
     if (this.state.redirect) {
-      return <Redirect to='/dashboard' />
+      //console.log('THE STATE: ' + this.state.jwt)
+      return <Redirect to={{
+        pathname: '/users/dashboard', 
+        state: { jwt: this.state.jwt }
+      }}/>
     }
   }
 
