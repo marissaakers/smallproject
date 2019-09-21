@@ -36,7 +36,6 @@ class Search extends Component {
         return response.text()
       })
       .then((data) => {
-        console.log('returned data: ' + data)
         this.setState({result: data})
       })
       .then(() => {this.setRedirect()})

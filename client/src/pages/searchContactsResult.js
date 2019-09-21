@@ -11,33 +11,35 @@ class SearchContactsResult extends Component {
       result: this.props.location.state.result,
       jwt: this.props.location.state.jwt,
       redirect: false,
-      contactList: [ ]
+      contactList: [ {} ]
     }
-    let arr1 = this.parseResult()
-    console.log('arr1 '+arr1)
-    // this.setState({contactList: arr1})
   }
 
   parseResult = () => {
     let parsed = JSON.parse(this.state.result)
-    console.log(parsed.contacts)
-    let list = parsed.contacts
-    let arr = []
-    list.map((element) => {
-      arr.push(element)
-      console.log('element: '+element)
-    })
-    return arr
+    console.log('parsed '+parsed.contacts)
+    return parsed.contacts
+  }
+
+  mapResult = () => {
+    let arr = this.parseResult()
+    return arr.map((n) => 
+    <div>
+      <li>Full Name: {n.name}</li>
+      <li>Phone Number: {n.number}</li>
+      <li>Email Address: {n.email}</li>
+      <li></li>
+    </div>
+    )
   }
   
   render() {
-    const mapResult = this.parseResult().map((n) => <li>{n}</li>)
     console.log()
     return(
       <div >
         <h1 style={{margin: '5%'}}>Search Results</h1>
         <div style={styling.outerDiv}>
-        <ul>{mapResult}</ul>
+        <ul>{this.mapResult()}</ul>
             <div>
               <Link to={{
                 pathname: '/users/dashboard',
