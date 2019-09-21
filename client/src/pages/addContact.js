@@ -14,7 +14,6 @@ class AddContact extends Component {
       jwt: this.props.location.state.jwt,
       result: '',
       redirect: false,
-      showName: false
     }
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleNumberChange = this.handleNumberChange.bind(this);
@@ -58,14 +57,30 @@ class AddContact extends Component {
         this.setState({
           showName: true
         })
-
-        // this.setState({jwt: data.substring(38, data.length - 2)})
-        // console.log(this.state.jwt)
       })
-      //.then(() => {this.setRedirect()})
+      .then(() => {
+        this.setRedirect()
+      })
       .catch(() => {
         console.log('didnt post')
       })
+  }
+
+  setRedirect = () => {
+    this.setState({
+      redirect: true
+    })
+  }
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to={{
+        pathname: '/add-contact-confirmation',
+        state: {
+          name: this.state.name,
+          jwt: this.state.jwt
+        }
+      }}/>
+    }
   }
 
   onSubmit = (e) => {
@@ -81,20 +96,6 @@ class AddContact extends Component {
     this.postAndFetchData('contacts/create-contact')
   }
 
-  // setRedirect = () => {
-  //   this.setState({
-  //     redirect: true
-  //   })
-  // }
-  // renderRedirect = () => {
-  //   if (this.state.redirect) {
-  //     //console.log('THE STATE: ' + this.state.jwt)
-  //     return <Redirect to={{
-  //       pathname: '/users/dashboard', 
-  //       state: { jwt: this.state.jwt }
-  //     }}/>
-  //   }
-  // }
 
   render() {
     return(
@@ -117,16 +118,10 @@ class AddContact extends Component {
               <Form.Control type="password" placeholder="email address"  value={this.state.email} onChange={this.handleEmailChange}/>
             </FormGroup>
             <div>
-              {/* {this.renderRedirect()} */}
+               {this.renderRedirect()}
               <Button variant="primary" onClick={(e) => this.onSubmit()} >
                 Submit
               </Button>
-              <script>
-                if(this.state.showName == true)
-                  //this.state.result = this.state.name + ' created...';
-                
-             </script>
-             {this.state.showName && <p>{this.state.name + ' created...'}</p>}
             </div>
             <div>
               <Link to={{
