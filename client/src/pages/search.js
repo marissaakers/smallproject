@@ -9,7 +9,7 @@ class Search extends Component {
     this.state = {
       searchName: '',
       jwt: this.props.location.state.jwt,
-      result: [{}],
+      result: '',
       redirect: false,
       found: false
     }
@@ -33,11 +33,7 @@ class Search extends Component {
       body: JSON.stringify(this.state)
       })
       .then((response) => {
-        // this.setState({result: response.clone().json()})
-        // response.json()
-        // console.log(response.json())
         return response.text()
-        //return JSON.stringify(response.clone().json())
       })
       .then((data) => {
         console.log('returned data: ' + data)

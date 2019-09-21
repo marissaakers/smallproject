@@ -6,40 +6,38 @@ import { Link, Redirect } from 'react-router-dom'
 class SearchContactsResult extends Component {
   constructor(props) {
     super(props)
-    console.log(this.props.location.state.result)
+    console.log('type '+this.props.location.state.result)
     this.state = {
-      name: '',
-      number: '',
-      email: '',
       result: this.props.location.state.result,
       jwt: this.props.location.state.jwt,
       redirect: false,
-      showName: false
+      contactList: [ ]
     }
-    this.mapResult()
+    let arr1 = this.parseResult()
+    console.log('arr1 '+arr1)
+    // this.setState({contactList: arr1})
   }
 
   parseResult = () => {
     let parsed = JSON.parse(this.state.result)
     console.log(parsed.contacts)
-    return parsed.contacts
+    let list = parsed.contacts
+    let arr = []
+    list.map((element) => {
+      arr.push(element)
+      console.log('element: '+element)
+    })
+    return arr
   }
-
-  mapResult = () => {
-    const parsed = this.parseResult()
-    console.log(parsed)
-    let list = parsed.map((n) => 
-      <li>{n}</li>
-    )
-    return list
-  }
-
+  
   render() {
+    const mapResult = this.parseResult().map((n) => <li>{n}</li>)
+    console.log()
     return(
       <div >
         <h1 style={{margin: '5%'}}>Search Results</h1>
         <div style={styling.outerDiv}>
-            <ul>{this.mapResult && console.log('result ' + this.mapResult())}</ul>
+        <ul>{mapResult}</ul>
             <div>
               <Link to={{
                 pathname: '/users/dashboard',
