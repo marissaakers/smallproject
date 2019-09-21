@@ -8,6 +8,7 @@ import Dashboard from './pages/dashboard';
 import AddContact from './pages/addContact'
 import Search from './pages/search'
 import ShowContact from './pages/showContact'
+import SearchContactsResult from './pages/searchContactsResult'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path='/contacts/create-contact' component={AddContact} />
           <Route path='/contacts/search' component={Search} />
           <Route path='/contacts' component={ShowContact} />
+          <Route path='/search-contacts/result' component={SearchContactsResult} />
         </Switch>
       </Router>
     </div>

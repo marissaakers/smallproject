@@ -6,39 +6,21 @@ import { Link, Redirect } from 'react-router-dom'
 class Search extends Component {
   constructor(props) {
     super(props)
-    console.log(this.props.location.state.jwt)
     this.state = {
-      name: '',
-      number: '',
-      email: '',
+      searchName: '',
       jwt: this.props.location.state.jwt,
-      result: '',
+      result: [{}],
       redirect: false,
       found: false
     }
-    this.handleNameChange = this.handleNameChange.bind(this);
-    this.handleNumberChange = this.handleNumberChange.bind(this);
-    this.handleEmailChange = this.handleEmailChange.bind(this);
-  }
-  handleNameChange = (e) => {
-    this.setState({
-      name: e.target.value
-    })
-    console.log(this.state.name)
+    this.handleSearchNameChange = this.handleSearchNameChange.bind(this);
   }
 
-  handleNumberChange = (e) => {
+  handleSearchNameChange = (e) => {
     this.setState({
-      number: e.target.value
+      searchName: e.target.value
     })
-    console.log(this.state.number)
-  }
-
-  handleEmailChange = (e) => {
-    this.setState({
-      email: e.target.value
-    })
-    console.log(this.state.email)
+    console.log(this.state.searchName)
   }
 
   postAndFetchData = (path) => {
@@ -51,13 +33,17 @@ class Search extends Component {
       body: JSON.stringify(this.state)
       })
       .then((response) => {
+        // this.setState({result: response.clone().json()})
+        // response.json()
+        // console.log(response.json())
         return response.text()
+        //return JSON.stringify(response.clone().json())
       })
       .then((data) => {
-        this.setState({jwt: data.substring(38, data.length - 2)})
-        console.log(this.state.jwt)
+        console.log('returned data: ' + data)
+        this.setState({result: data})
       })
-      //.then(() => {this.setRedirect()})
+      .then(() => {this.setRedirect()})
       .catch(() => {
         console.log('didnt post')
       })
@@ -65,30 +51,28 @@ class Search extends Component {
 
   onSubmit = (e) => {
     if(e) {
-      this.setState({
-        showName: true
-      })
-      console.log(this.state.showName)
-      console.log("HIT IF")
       e.preventDefault()
     }
-    this.postAndFetchData('contacts/create-contact')
+    this.postAndFetchData('contacts/search')
   }
 
-  // setRedirect = () => {
-  //   this.setState({
-  //     redirect: true
-  //   })
-  // }
-  // renderRedirect = () => {
-  //   if (this.state.redirect) {
-  //     //console.log('THE STATE: ' + this.state.jwt)
-  //     return <Redirect to={{
-  //       pathname: '/users/dashboard', 
-  //       state: { jwt: this.state.jwt }
-  //     }}/>
-  //   }
-  // }
+  setRedirect = () => {
+    this.setState({
+      redirect: true
+    })
+  }
+
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to={{
+        pathname: '/search-contacts/result', 
+        state: {
+          jwt: this.state.jwt,
+          result: this.state.result
+        }
+      }}/>
+    }
+  }
 
   render() {
     return(
@@ -98,20 +82,19 @@ class Search extends Component {
           <Form style={styling.formDiv}>
             <FormGroup>
               <FormLabel>Full Name</FormLabel>
-              <FormControl type="username" placeholder="insert full name" value={this.state.name} onChange={this.handleNameChange} />
+              <FormControl placeholder="insert full name" value={this.state.searchName} onChange={this.handleSearchNameChange} />
             </FormGroup>
             <div>
             
             </div>
             
             <div>
-              {/* {this.renderRedirect()} */}
+              {this.renderRedirect()}
               <Button variant="primary" onClick={(e) => this.onSubmit()} >
                 Submit
               </Button>
             </div>
             <div>
-              {/* {this.renderRedirect()} */}
               <Link to={{
                 pathname: '/users/dashboard',
                 state: { jwt: this.state.jwt }

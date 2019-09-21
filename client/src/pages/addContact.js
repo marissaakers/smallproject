@@ -54,15 +54,11 @@ class AddContact extends Component {
         return response.text()
       })
       .then((data) => {
-        console.log('DATA '+data)
+        console.log('DATA '+ data)
         this.setState({
           showName: true
         })
-
-        // this.setState({jwt: data.substring(38, data.length - 2)})
-        // console.log(this.state.jwt)
       })
-      //.then(() => {this.setRedirect()})
       .catch(() => {
         console.log('didnt post')
       })
@@ -75,26 +71,8 @@ class AddContact extends Component {
       console.log("HIT IF")
       e.preventDefault()
     }
-    // this.setState({
-    //     showName: true
-    // })
     this.postAndFetchData('contacts/create-contact')
   }
-
-  // setRedirect = () => {
-  //   this.setState({
-  //     redirect: true
-  //   })
-  // }
-  // renderRedirect = () => {
-  //   if (this.state.redirect) {
-  //     //console.log('THE STATE: ' + this.state.jwt)
-  //     return <Redirect to={{
-  //       pathname: '/users/dashboard', 
-  //       state: { jwt: this.state.jwt }
-  //     }}/>
-  //   }
-  // }
 
   render() {
     return(
@@ -109,23 +87,17 @@ class AddContact extends Component {
 
             <FormGroup>
               <FormLabel>Phone Number</FormLabel>
-              <Form.Control type="password" placeholder="phone number"  value={this.state.number} onChange={this.handleNumberChange}/>
+              <Form.Control placeholder="phone number"  value={this.state.number} onChange={this.handleNumberChange}/>
             </FormGroup>
 
             <FormGroup>
               <FormLabel>Email Address</FormLabel>
-              <Form.Control type="password" placeholder="email address"  value={this.state.email} onChange={this.handleEmailChange}/>
+              <Form.Control placeholder="email address"  value={this.state.email} onChange={this.handleEmailChange}/>
             </FormGroup>
             <div>
-              {/* {this.renderRedirect()} */}
               <Button variant="primary" onClick={(e) => this.onSubmit()} >
                 Submit
               </Button>
-              <script>
-                if(this.state.showName == true)
-                  //this.state.result = this.state.name + ' created...';
-                
-             </script>
              {this.state.showName && <p>{this.state.name + ' created...'}</p>}
             </div>
             <div>
