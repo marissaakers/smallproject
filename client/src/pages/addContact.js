@@ -53,14 +53,17 @@ class AddContact extends Component {
         return response.text()
       })
       .then((data) => {
-        console.log('DATA '+data)
+        console.log('DATA '+ data)
         this.setState({
           showName: true
         })
       })
+
       .then(() => {
         this.setRedirect()
       })
+
+
       .catch(() => {
         console.log('didnt post')
       })
@@ -90,11 +93,10 @@ class AddContact extends Component {
       console.log("HIT IF")
       e.preventDefault()
     }
-    // this.setState({
-    //     showName: true
-    // })
     this.postAndFetchData('contacts/create-contact')
   }
+
+
 
 
   render() {
@@ -110,18 +112,25 @@ class AddContact extends Component {
 
             <FormGroup>
               <FormLabel>Phone Number</FormLabel>
-              <Form.Control type="password" placeholder="phone number"  value={this.state.number} onChange={this.handleNumberChange}/>
+              <Form.Control placeholder="phone number"  value={this.state.number} onChange={this.handleNumberChange}/>
             </FormGroup>
 
             <FormGroup>
               <FormLabel>Email Address</FormLabel>
-              <Form.Control type="password" placeholder="email address"  value={this.state.email} onChange={this.handleEmailChange}/>
+              <Form.Control placeholder="email address"  value={this.state.email} onChange={this.handleEmailChange}/>
             </FormGroup>
             <div>
+
                {this.renderRedirect()}
               <Button variant="primary" onClick={(e) => this.onSubmit()} >
                 Submit
               </Button>
+
+              <Button variant="primary" onClick={(e) => this.onSubmit()} >
+                Submit
+              </Button>
+             {this.state.showName && <p>{this.state.name + ' created...'}</p>}
+
             </div>
             <div>
               <Link to={{

@@ -9,7 +9,6 @@ class Dashboard extends Component {
     this.state = {
       jwt: this.props.location.state.jwt
     }
-    console.log(this.state.jwt)
   }
   render() {
     return(
