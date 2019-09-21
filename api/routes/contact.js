@@ -20,11 +20,11 @@ router.get('/', auth, function(req, res) {
 })
 
 // Search for one contact in specific based off the contact name provided
-router.get('/search', auth, function(req, res) {
-  Contact.findOne({name: req.body.searchName})
+router.post('/search', auth, function(req, res) {
+  Contact.find({name: req.body.searchName})
   .exec()
   .then(contact => {
-    res.status(200).json(contact)
+    res.status(200).json({contacts: contact})
   })
   .catch(err => {
     res.status(500).json(err)
