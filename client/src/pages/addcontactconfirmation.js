@@ -14,49 +14,7 @@ class AddContactConfirmation extends Component {
     }
     console.log(this.state.name)
   }
-
-
-  // postAndFetchData = (path) => {
-  //   fetch('http://localhost:3000/' + path , {
-  //     method: "POST",
-  //     headers: {
-  //       'Content-type': 'application/json',
-  //       'Authorization': 'Bearer ' + this.state.jwt
-  //     },
-  //     body: JSON.stringify(this.state)
-  //     })
-  //     .then((response) => {
-  //       return response.text()
-  //     })
-  //     .then((data) => {
-  //       console.log('DATA '+data)
-  //       this.setState({
-  //         showName: true
-  //       })
-
-  //       // this.setState({jwt: data.substring(38, data.length - 2)})
-  //       // console.log(this.state.jwt)
-  //     })
-  //     //.then(() => {this.setRedirect()})
-  //     .catch(() => {
-  //       console.log('didnt post')
-  //     })
-  // }
-
-  // onSubmit = (e) => {
-  //   if(e) {
-      
-  //     console.log(this.state.showName)
-  //     console.log("HIT IF")
-  //     e.preventDefault()
-  //   }
-  //   // this.setState({
-  //   //     showName: true
-  //   // })
-  //   this.postAndFetchData('contacts/create-contact')
-  // }
-
-
+  
   render() {
     return(
       <div >
