@@ -16,12 +16,20 @@ class Dashboard extends Component {
       <div style={styling.mainDiv} >
       <h1 style={{margin: '5%'}} >Dashboard</h1>
       <div style={styling.buttonDiv}>
-        <Link to="/contacts"><Button style={styling.signup}>Contacts</Button></Link> 
+        <Link to={{
+          pathname: '/contacts',
+          state: { jwt: this.state.jwt }
+        }}><Button style={styling.cont}>Contacts</Button></Link> 
+
         <Link to={{
           pathname: '/contacts/create-contact',
           state: { jwt: this.state.jwt }
-        }}><Button style={styling.buttons}>Add Contact</Button></Link>
-        <Link to='/contacts/search'><Button style={styling.buttons}>Search</Button></Link>
+        }}><Button style={styling.add}>Add Contact</Button></Link>
+
+        <Link to={{
+          pathname: '/contacts/search',
+          state: { jwt: this.state.jwt }
+        }}><Button style={styling.sea}>Search</Button></Link>
       </div>
     </div>
     )
@@ -32,13 +40,17 @@ const styling = {
   mainDiv: {
     textAlign: 'center'
   },
-  buttons: {
-    margin: '25%',
-    padding: '40%'
+  add: {
+    marginLeft: '50%',
+    padding: '20%'
   },
-  signup: {
-    
-    marginRight: '30%'
+  cont: {
+    marginRight: '50%',
+    padding: '20%'
+  },
+  sea: {
+    marginLeft: '130%',
+    padding: '20%'
   },
   buttonDiv: {
     display: 'flex',

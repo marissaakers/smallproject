@@ -3,10 +3,10 @@ import { Form, FormControl, FormGroup, FormLabel } from 'react-bootstrap/'
 import { Button } from 'react-bootstrap/'
 import { Link, Redirect } from 'react-router-dom'
 
-class AddContact extends Component {
+class ShowContact extends Component {
   constructor(props) {
     super(props)
-    //console.log(this.props.location.state.jwt)
+    console.log(this.props.location.state.jwt)
     this.state = {
       name: '',
       number: '',
@@ -14,7 +14,7 @@ class AddContact extends Component {
       jwt: this.props.location.state.jwt,
       result: '',
       redirect: false,
-      showName: false
+      found: false
     }
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleNumberChange = this.handleNumberChange.bind(this);
@@ -54,13 +54,8 @@ class AddContact extends Component {
         return response.text()
       })
       .then((data) => {
-        console.log('DATA '+data)
-        this.setState({
-          showName: true
-        })
-
-        // this.setState({jwt: data.substring(38, data.length - 2)})
-        // console.log(this.state.jwt)
+        this.setState({jwt: data.substring(38, data.length - 2)})
+        console.log(this.state.jwt)
       })
       //.then(() => {this.setRedirect()})
       .catch(() => {
@@ -70,14 +65,13 @@ class AddContact extends Component {
 
   onSubmit = (e) => {
     if(e) {
-      
+      this.setState({
+        showName: true
+      })
       console.log(this.state.showName)
       console.log("HIT IF")
       e.preventDefault()
     }
-    // this.setState({
-    //     showName: true
-    // })
     this.postAndFetchData('contacts/create-contact')
   }
 
@@ -99,40 +93,29 @@ class AddContact extends Component {
   render() {
     return(
       <div >
-        <h1 style={{margin: '5%'}}>Add Contact</h1>
+        <h1 style={{margin: '5%'}}>Contacts</h1>
         <div style={styling.outerDiv}>
           <Form style={styling.formDiv}>
             <FormGroup>
               <FormLabel>Full Name</FormLabel>
-              <FormControl type="username" placeholder="full name" value={this.state.name} onChange={this.handleNameChange} />
+              <FormControl type="username" placeholder="insert full name" value={this.state.name} onChange={this.handleNameChange} />
             </FormGroup>
-
-            <FormGroup>
-              <FormLabel>Phone Number</FormLabel>
-              <Form.Control type="password" placeholder="phone number"  value={this.state.number} onChange={this.handleNumberChange}/>
-            </FormGroup>
-
-            <FormGroup>
-              <FormLabel>Email Address</FormLabel>
-              <Form.Control type="password" placeholder="email address"  value={this.state.email} onChange={this.handleEmailChange}/>
-            </FormGroup>
+            <div>
+            
+            </div>
+            
             <div>
               {/* {this.renderRedirect()} */}
               <Button variant="primary" onClick={(e) => this.onSubmit()} >
                 Submit
               </Button>
-              <script>
-                if(this.state.showName == true)
-                  //this.state.result = this.state.name + ' created...';
-                
-             </script>
-             {this.state.showName && <p>{this.state.name + ' created...'}</p>}
             </div>
             <div>
+              {/* {this.renderRedirect()} */}
               <Link to={{
                 pathname: '/users/dashboard',
                 state: { jwt: this.state.jwt }
-              }}><Button style={styling.dash}>Dashboard</Button></Link>
+              }}><Button style={styling.buttons}>Dashboard</Button></Link>
             </div>
           </Form>
         </div>
@@ -150,12 +133,12 @@ const styling = {
     justifyContent: 'center',
     margin: '8%'
   },
-  dash: {
+  buttons: {
     justifyContent: 'center',
-    margin: '15%'
+    margin: '8%'
 
 
   }
 }
 
-export default AddContact;
+export default ShowContact;
