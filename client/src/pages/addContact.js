@@ -14,7 +14,6 @@ class AddContact extends Component {
       jwt: this.props.location.state.jwt,
       result: '',
       redirect: false,
-      showName: false
     }
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleNumberChange = this.handleNumberChange.bind(this);
@@ -59,9 +58,32 @@ class AddContact extends Component {
           showName: true
         })
       })
+
+      .then(() => {
+        this.setRedirect()
+      })
+
+
       .catch(() => {
         console.log('didnt post')
       })
+  }
+
+  setRedirect = () => {
+    this.setState({
+      redirect: true
+    })
+  }
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to={{
+        pathname: '/add-contact-confirmation',
+        state: {
+          name: this.state.name,
+          jwt: this.state.jwt
+        }
+      }}/>
+    }
   }
 
   onSubmit = (e) => {
@@ -73,6 +95,9 @@ class AddContact extends Component {
     }
     this.postAndFetchData('contacts/create-contact')
   }
+
+
+
 
   render() {
     return(
@@ -95,10 +120,17 @@ class AddContact extends Component {
               <Form.Control placeholder="email address"  value={this.state.email} onChange={this.handleEmailChange}/>
             </FormGroup>
             <div>
+
+               {this.renderRedirect()}
+              <Button variant="primary" onClick={(e) => this.onSubmit()} >
+                Submit
+              </Button>
+
               <Button variant="primary" onClick={(e) => this.onSubmit()} >
                 Submit
               </Button>
              {this.state.showName && <p>{this.state.name + ' created...'}</p>}
+
             </div>
             <div>
               <Link to={{
