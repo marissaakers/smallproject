@@ -27,11 +27,9 @@ function App() {
           <Route exact path='/contacts/create-contact' component={AddContact} />
           <Route exact path='/contacts/search' component={Search} />
           <Route exact path='/contacts' component={ShowContact} />
-          <Route component={NotFound} />
-
           <Route path='/add-contact-confirmation' component={AddContactConfirmation} />
-
           <Route path='/search-contacts/result' component={SearchContactsResult} />
+          <Route component={NotFound} />
 
         </Switch>
       </Router>
