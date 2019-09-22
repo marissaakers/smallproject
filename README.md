@@ -1,3 +1,0 @@
-# smallproject
-
-Contact Manager
