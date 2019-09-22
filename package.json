@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cd node api/index.js && cd ../client react-scripts start"
+    "start": "node api/index.js && ../client/react-scripts start"
   },
   "repository": {
     "type": "git",
