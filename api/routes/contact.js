@@ -12,7 +12,7 @@ router.get('/', auth, function(req, res) {
   .populate('owner', 'username')
   .exec()
   .then(contacts => {
-    res.status(200).json(contacts)
+    res.status(200).json({contacts: contacts})
   })
   .catch(err => {
     res.status(500).json(err)
@@ -21,7 +21,10 @@ router.get('/', auth, function(req, res) {
 
 // Search for one contact in specific based off the contact name provided
 router.post('/search', auth, function(req, res) {
-  Contact.find({name: req.body.searchName})
+  Contact.find({
+    name: req.body.searchName,
+    owner: req.userData.userId
+  })
   .exec()
   .then(contact => {
     res.status(200).json({contacts: contact})

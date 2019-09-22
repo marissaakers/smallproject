@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button'
 import { Link }from 'react-router-dom'
+import plus from './images/addround.png'
+import showcontacts from './images/list.png'
+import magnifier from './images/search.png'
+import logo from './images/rybamatransparent.png'
+
+console.log(plus);
+console.log(showcontacts);
+console.log(magnifier);
+console.log(logo);
+
 
 class Dashboard extends Component {
   constructor(props) {
@@ -13,22 +23,22 @@ class Dashboard extends Component {
   render() {
     return(
       <div style={styling.mainDiv} >
-      <h1 style={{margin: '5%'}} >Dashboard</h1>
+      <div> <img src={logo} width = "800"/> </div>
       <div style={styling.buttonDiv}>
         <Link to={{
           pathname: '/contacts',
           state: { jwt: this.state.jwt }
-        }}><Button style={styling.cont}>Contacts</Button></Link> 
+        }}><input type="image" src={showcontacts} width = "400"/></Link>
 
         <Link to={{
           pathname: '/contacts/create-contact',
           state: { jwt: this.state.jwt }
-        }}><Button style={styling.add}>Add Contact</Button></Link>
+        }}><input type="image" src={plus} width = "400"/></Link>
 
         <Link to={{
           pathname: '/contacts/search',
           state: { jwt: this.state.jwt }
-        }}><Button style={styling.sea}>Search</Button></Link>
+        }}><input type="image" src={magnifier} width = "400"/></Link>
       </div>
     </div>
     )

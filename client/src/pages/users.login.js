@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { Form, FormControl, FormGroup, FormLabel } from 'react-bootstrap/'
 import { Button } from 'react-bootstrap/'
 import { Redirect } from 'react-router-dom'
-import loginlit from './loginlit.png'
+import loginlit from './images/loginlit.png'
+import submitbutton from './images/submit.png'
 
 console.log(loginlit);
+console.log(submitbutton);
 
 class Login extends Component {
   constructor(props) {
@@ -13,10 +15,16 @@ class Login extends Component {
       username: '',
       password: '',
       jwt: '',
-      redirect: false
+      redirect: false,
+      result: ''
     }
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
   }
+
+  componentDidMount() {
+    this.mounted = true
+  }
+
   handleUsernameChange = (e) => {
     this.setState({
       username: e.target.value
@@ -40,10 +48,25 @@ class Login extends Component {
       body: JSON.stringify(this.state)
       })
       .then((response) => {
-        return response.text()
+        console.log(response.status)
+        if(response.status == 200 || response.status == 201) {
+          return response.text()
+        } else if (response.status == 401 || response.status == 400 || response.status == 500 && this.mounted == true) {
+          this.setState({
+            redirect: false,
+            result: 'Username or password incorrect.'
+          })
+          return
+        }
       })
       .then((data) => {
-        this.setState({jwt: data.substring(38, data.length - 2)})
+        let res = JSON.parse(data)
+        res = res.token
+        if(this.mounted == true) {
+          this.setState({
+            jwt: res
+          })
+        }
         console.log(this.state.jwt)
       })
       .then(() => {this.setRedirect()})
@@ -53,10 +76,6 @@ class Login extends Component {
   }
 
   onSubmit = (e) => {
-    if(e) {
-      console.log("HIT IF")
-      e.preventDefault()
-    }
     this.postAndFetchData('users/login')
   }
 
@@ -75,10 +94,14 @@ class Login extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.mounted = false
+  }
+
   render() {
     return(
       <div >
-        <input type="image" src={loginlit} width = "700"/>
+        <img src={loginlit} width = "600"/>
         <div style={styling.outerDiv}>
           <Form style={styling.formDiv}>
             <FormGroup>
@@ -90,12 +113,13 @@ class Login extends Component {
               <FormLabel>Password</FormLabel>
               <Form.Control type="password" placeholder="password"  value={this.state.password} onChange={this.handlePasswordChange}/>
             </FormGroup>
+            <p>{this.state.result}</p>
             <div>
               {this.renderRedirect()}
-              <Button variant="primary" onClick={(e) => this.onSubmit()} >
-                Submit
+              <Button variant="link" onClick={(e) => this.onSubmit()} >
+                <img src={submitbutton} width = "200"/>
               </Button>
-              <p>{this.state.jwt}</p>
+              <p>{this.state.result}</p>
             </div>
           </Form>
         </div>

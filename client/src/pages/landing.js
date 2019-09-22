@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button'
 import { Link }from 'react-router-dom'
-import logo from './rybamatransparent.png'; // Tell Webpack this JS file uses this image
-import signuplogo from './signupdim.png';
-import loginlogo from './logindim.png';
-import signuplit from './signup_lit.png'
-import loginlit from './loginlit.png'
+import logo from './images/rybamatransparent.png'; // Tell Webpack this JS file uses this image
+import signuplogo from './images/signupdim.png';
+import loginlogo from './images/logindim.png';
+import signuplit from './images/signup_lit.png'
+import loginlit from './images/loginlit.png'
 
 console.log(logo);
 console.log(loginlogo);
@@ -21,7 +21,7 @@ class Landing extends Component {
       <div> <img src={logo} width = "800"/> </div>
 
       <div style={styling.buttonDiv}>
-        <a href="#" id="image"><Link to="/users/signup"><input type="image" src={signuplogo} onMouseOver="this.src={signuplit}" onMouseOut="this.src='./signupdim.png'"  width = "700"/></Link></a>
+        <Link to="/users/signup"><input type="image" src={signuplogo} width = "700"/></Link>
         <Link to="/users/login"><input type="image" src={loginlogo} width = "700"/></Link>
       </div>
     </div>
@@ -31,7 +31,7 @@ class Landing extends Component {
 
 const styling = {
   mainDiv: {
-    background: '#200c4c',
+    background: '#0f0524',
     textAlign: 'center'
   },
   buttons: {

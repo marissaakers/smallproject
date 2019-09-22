@@ -2,11 +2,18 @@ import React, { Component } from 'react';
 import { Form, FormControl, FormGroup, FormLabel } from 'react-bootstrap/'
 import { Button } from 'react-bootstrap/'
 import { Link, Redirect } from 'react-router-dom'
+import addcontact from './images/addcontact.png'
+import submitbutton from './images/submit.png'
+import dashbutton from './images/dashboard.png'
+
+console.log(addcontact);
+console.log(submitbutton);
+console.log(dashbutton);
+
 
 class AddContact extends Component {
   constructor(props) {
     super(props)
-    //console.log(this.props.location.state.jwt)
     this.state = {
       name: '',
       number: '',
@@ -50,15 +57,16 @@ class AddContact extends Component {
       body: JSON.stringify(this.state)
       })
       .then((response) => {
+        if(response.status == 200 || response.status == 201) {
+          this.setState({
+            showName: true
+          })
+        }
         return response.text()
       })
       .then((data) => {
         console.log('DATA '+ data)
-        this.setState({
-          showName: true
-        })
       })
-
       .then(() => {
         this.setRedirect()
       })
@@ -88,7 +96,7 @@ class AddContact extends Component {
 
   onSubmit = (e) => {
     if(e) {
-      
+
       console.log(this.state.showName)
       console.log("HIT IF")
       e.preventDefault()
@@ -102,7 +110,7 @@ class AddContact extends Component {
   render() {
     return(
       <div >
-        <h1 style={{margin: '5%'}}>Add Contact</h1>
+      <img src={addcontact} width = "700"/>
         <div style={styling.outerDiv}>
           <Form style={styling.formDiv}>
             <FormGroup>
@@ -122,21 +130,16 @@ class AddContact extends Component {
             <div>
 
                {this.renderRedirect()}
-              <Button variant="primary" onClick={(e) => this.onSubmit()} >
-                Submit
-              </Button>
-
-              <Button variant="primary" onClick={(e) => this.onSubmit()} >
-                Submit
-              </Button>
-             {this.state.showName && <p>{this.state.name + ' created...'}</p>}
-
+            <div class= "container">
+              <Button variant="link" onClick={(e) => this.onSubmit()} >
+                <img src={submitbutton} width = "200"/>
+              </Button> </div>
             </div>
             <div>
               <Link to={{
                 pathname: '/users/dashboard',
                 state: { jwt: this.state.jwt }
-              }}><Button style={styling.dash}>Dashboard</Button></Link>
+              }}> <img src={dashbutton} width = "200"/> </Link>
             </div>
           </Form>
         </div>
@@ -148,6 +151,7 @@ class AddContact extends Component {
 const styling = {
   formDiv: {
     width: '50%',
+    margin: '-100px'
   },
   outerDiv: {
     display: 'flex',
@@ -156,7 +160,7 @@ const styling = {
   },
   dash: {
     justifyContent: 'center',
-    margin: '15%'
+    margin: '5%'
 
 
   }

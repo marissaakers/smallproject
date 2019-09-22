@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import { Form, FormControl, FormGroup, FormLabel } from 'react-bootstrap/'
 import { Button } from 'react-bootstrap/'
 import { Link, Redirect } from 'react-router-dom'
+import addcontact from './images/addcontact.png'
+import addmore from './images/addmore.png'
+import dashbutton from './images/dashboard.png'
+
+console.log(addcontact);
+console.log(addmore);
+console.log(dashbutton);
+
 
 class AddContactConfirmation extends Component {
   constructor(props) {
@@ -14,11 +22,11 @@ class AddContactConfirmation extends Component {
     }
     console.log(this.state.name)
   }
-  
+
   render() {
     return(
       <div >
-        <h1 style={{margin: '5%'}}>Add Contact</h1>
+        <div> <img src={addcontact} width = "700"/> </div>
         <div styling={styling.para}>
           <p>{this.state.name + ' created...'}</p>
         </div>
@@ -26,11 +34,11 @@ class AddContactConfirmation extends Component {
           <Link to={{
                 pathname: '/contacts/create-contact',
                 state: { jwt: this.state.jwt }
-          }}><Button style={styling.addcontact}>Add Contact</Button></Link>
+          }}><img src={addmore} width = "200"/></Link>
           <Link to={{
-                pathname: '/users/dashboard',
-                state: { jwt: this.state.jwt }
-          }}><Button style={styling.dash}>Dashboard</Button></Link>
+            pathname: '/users/dashboard',
+            state: { jwt: this.state.jwt }
+          }}> <img src={dashbutton} width = "200"/> </Link>
         </div>
       </div>
     )

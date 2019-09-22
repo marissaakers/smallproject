@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import { Form, FormControl, FormGroup, FormLabel } from 'react-bootstrap/'
 import { Button } from 'react-bootstrap/'
 import { Link, Redirect } from 'react-router-dom'
+import searchpic from './images/searching.png'
+import submitbutton from './images/submit.png'
+import dashbutton from './images/dashboard.png'
+
+
+console.log(searchpic);
+console.log(submitbutton);
+console.log(dashbutton);
 
 class Search extends Component {
   constructor(props) {
@@ -33,6 +41,11 @@ class Search extends Component {
       body: JSON.stringify(this.state)
       })
       .then((response) => {
+        if(response.status == 200 || response.status == 201) {
+          this.setState({
+            showName: true
+          })
+        }
         return response.text()
       })
       .then((data) => {
@@ -60,7 +73,7 @@ class Search extends Component {
   renderRedirect = () => {
     if (this.state.redirect) {
       return <Redirect to={{
-        pathname: '/search-contacts/result', 
+        pathname: '/search-contacts/result',
         state: {
           jwt: this.state.jwt,
           result: this.state.result
@@ -72,7 +85,7 @@ class Search extends Component {
   render() {
     return(
       <div >
-        <h1 style={{margin: '5%'}}>Search</h1>
+        <img src={searchpic} width = "600"/>
         <div style={styling.outerDiv}>
           <Form style={styling.formDiv}>
             <FormGroup>
@@ -80,21 +93,22 @@ class Search extends Component {
               <FormControl placeholder="insert full name" value={this.state.searchName} onChange={this.handleSearchNameChange} />
             </FormGroup>
             <div>
-            
+
             </div>
-            
+
             <div>
-              {this.renderRedirect()}
-              <Button variant="primary" onClick={(e) => this.onSubmit()} >
-                Submit
-              </Button>
-            </div>
-            <div>
-              <Link to={{
-                pathname: '/users/dashboard',
-                state: { jwt: this.state.jwt }
-              }}><Button style={styling.buttons}>Dashboard</Button></Link>
-            </div>
+            {this.renderRedirect()}
+                  <div class= "container">
+                    <Button variant="link" onClick={(e) => this.onSubmit()} >
+                      <img src={submitbutton} width = "200"/>
+                    </Button> </div>
+                </div>
+                <div>
+                <Link to={{
+                  pathname: '/users/dashboard',
+                  state: { jwt: this.state.jwt }
+                }}> <img src={dashbutton} width = "200"/> </Link>
+                </div>
           </Form>
         </div>
       </div>
@@ -105,6 +119,7 @@ class Search extends Component {
 const styling = {
   formDiv: {
     width: '50%',
+    margin: '-70px'
   },
   outerDiv: {
     display: 'flex',

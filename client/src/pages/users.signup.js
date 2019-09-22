@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import { Form, FormControl, FormGroup, FormLabel } from 'react-bootstrap/'
 import { Button } from 'react-bootstrap/'
 import { Redirect } from 'react-router-dom'
-import signuplit from './signup_lit.png'
+import signuplit from './images/signup_lit.png'
+import submitbutton from './images/submit.png'
 
 console.log(signuplit);
+console.log(submitbutton);
+
 
 class SignUp extends Component {
 
@@ -14,13 +17,16 @@ class SignUp extends Component {
       username: '',
       password: '',
       response: '',
+      result: '',
       redirect: false
     }
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
   }
 
-
+  componentDidMount() {
+    this.mounted = true
+  }
 
   handleUsernameChange = (e) => {
     this.setState({
@@ -45,30 +51,35 @@ class SignUp extends Component {
     body: JSON.stringify(this.state)
     })
     .then((response) => {
-      return response.text()
+      console.log(response.status)
+      if((response.status == 200 || response.status == 201) && this.mounted == true) {
+        this.setState({redirect: true})
+        return response.text()
+      } else if ((response.status == 401 || response.status == 400 || response.status == 500 ) && this.mounted == true) {
+        console.log('hit else if')
+        return this.setState({
+          redirect: false,
+          result: 'Username already exists.'
+        })
+      }
     })
-    .then((data) => {
-      this.setState({response: data})
-      console.log('state: ' + this.state.response)
-    })
-    .then(() => {this.setRedirect()})
+    .catch()
   }
 
-  setRedirect = () => {
-    this.setState({
-      redirect: true
-    })
-  }
   renderRedirect = () => {
     if (this.state.redirect) {
       return <Redirect to='/users/login' />
     }
   }
 
+  componentWillUnmount() {
+    this.mounted = false
+  }
+
   render() {
     return(
       <div >
-        <input type="image" src={signuplit} width = "700"/>
+       <img src={signuplit} width = "600"/> 
         <div style={styling.outerDiv}>
         <Form style={styling.formDiv}>
           <FormGroup>
@@ -82,11 +93,11 @@ class SignUp extends Component {
           </FormGroup>
           <div>
             {this.renderRedirect()}
-            <Button variant="primary" onClick={this.onSubmit} >
-              Submit
+            <Button variant="link" onClick={this.onSubmit} >
+              <img src={submitbutton} width = "200"/>
             </Button>
+            <p>{this.state.result}</p>
           </div>
-          {/* <p>{this.state.result.statusText}</p> */}
         </Form>
         </div>
       </div>
