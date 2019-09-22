@@ -33,6 +33,11 @@ class Search extends Component {
       body: JSON.stringify(this.state)
       })
       .then((response) => {
+        if(response.status == 200 || response.status == 201) {
+          this.setState({
+            showName: true
+          })
+        }
         return response.text()
       })
       .then((data) => {

@@ -24,6 +24,13 @@ class SearchContactsResult extends Component {
 
   mapResult = () => {
     let arr = this.parseResult()
+    if(arr.length == 0) {
+      return (
+        <div>
+          <p>No contacts with that name were found.</p>
+        </div>
+      )
+    }
     return arr.map((n) => 
     <div>
       <li>Full Name: {n.name}</li>
@@ -46,6 +53,10 @@ class SearchContactsResult extends Component {
                 pathname: '/users/dashboard',
                 state: { jwt: this.state.jwt }
               }}><Button style={styling.dash}>Dashboard</Button></Link>
+              <Link to={{
+                pathname: '/contacts/search',
+                state: { jwt: this.state.jwt }
+              }}><Button style={styling.dash}>Search</Button></Link>
             </div>
         </div>
       </div>

@@ -11,13 +11,16 @@ class SignUp extends Component {
       username: '',
       password: '',
       response: '',
+      result: '',
       redirect: false
     }
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
   }
 
-  
+  componentDidMount() {
+    this.mounted = true
+  }
 
   handleUsernameChange = (e) => {
     this.setState({
@@ -42,24 +45,29 @@ class SignUp extends Component {
     body: JSON.stringify(this.state)
     })
     .then((response) => {
-      return response.text()
+      console.log(response.status)
+      if((response.status == 200 || response.status == 201) && this.mounted == true) {
+        this.setState({redirect: true})
+        return response.text()
+      } else if ((response.status == 401 || response.status == 400 || response.status == 500 ) && this.mounted == true) {
+        console.log('hit else if')
+        return this.setState({
+          redirect: false,
+          result: 'Username already exists.'
+        })
+      }
     })
-    .then((data) => {
-      this.setState({response: data}) 
-      console.log('state: ' + this.state.response)
-    })
-    .then(() => {this.setRedirect()})
+    .catch()
   } 
 
-  setRedirect = () => {
-    this.setState({
-      redirect: true
-    })
-  }
   renderRedirect = () => {
     if (this.state.redirect) {
       return <Redirect to='/users/login' />
     }
+  }
+
+  componentWillUnmount() {
+    this.mounted = false
   }
 
   render() {
@@ -82,8 +90,8 @@ class SignUp extends Component {
             <Button variant="primary" onClick={this.onSubmit} >
               Submit
             </Button>
+            <p>{this.state.result}</p>
           </div>
-          {/* <p>{this.state.result.statusText}</p> */}
         </Form>
         </div>
       </div>
