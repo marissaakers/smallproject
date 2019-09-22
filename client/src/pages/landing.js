@@ -5,7 +5,7 @@ import logo from './rybamatransparent.png'; // Tell Webpack this JS file uses th
 import signuplogo from './signupdim.png';
 import loginlogo from './logindim.png';
 import signuplit from './signup_lit.png'
-import loginlit from './signuplit.png'
+import loginlit from './loginlit.png'
 
 console.log(logo);
 console.log(loginlogo);
