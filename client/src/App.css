@@ -19,6 +19,13 @@
   color: white;
 }
 
+body {
+  background-color: #282c34;
+  color: white;
+  font-family: Helvetica;
+  border: 0;
+}
+
 .App-link {
   color: #61dafb;
 }
