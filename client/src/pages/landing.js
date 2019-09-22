@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button'
 import { Link }from 'react-router-dom'
 
+// Set up landing page with two buttons that will link user to either the signup page or the login page
 class Landing extends Component {
   render() {
     return(
@@ -16,6 +17,7 @@ class Landing extends Component {
   }
 }
 
+// Styling the component
 const styling = {
   mainDiv: {
     textAlign: 'center'
@@ -30,8 +32,7 @@ const styling = {
   },
   buttonDiv: {
     display: 'flex',
-    justifyContent: 'center',
-    // border: '1px solid black'
+    justifyContent: 'center'
   }
 }
 
