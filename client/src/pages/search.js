@@ -23,7 +23,8 @@ class Search extends Component {
     }
     this.handleSearchNameChange = this.handleSearchNameChange.bind(this);
   }
-
+  
+ // Sets state name to whatever the user types
   handleSearchNameChange = (e) => {
     this.setState({
       searchName: e.target.value
@@ -31,6 +32,7 @@ class Search extends Component {
     console.log(this.state.searchName)
   }
 
+// Send the state to the api, receives data back and displays that data
   postAndFetchData = (path) => {
     fetch('http://localhost:3000/' + path , {
       method: "POST",
@@ -56,20 +58,21 @@ class Search extends Component {
         console.log('didnt post')
       })
   }
-
+  
+// Calls the postAndFetch function when submit button is clicked
   onSubmit = (e) => {
     if(e) {
       e.preventDefault()
     }
     this.postAndFetchData('contacts/search')
   }
-
+  // Prepares page to be redirected
   setRedirect = () => {
     this.setState({
       redirect: true
     })
   }
-
+  // Tells component where to redirect to
   renderRedirect = () => {
     if (this.state.redirect) {
       return <Redirect to={{
@@ -81,7 +84,7 @@ class Search extends Component {
       }}/>
     }
   }
-
+  // Displays format of page and styling
   render() {
     return(
       <div >
