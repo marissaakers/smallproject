@@ -76,7 +76,8 @@
 
 ## Contact API Route Calls
 
-```// Get all users from the data base that are under the user who is currently logged in (done with jsonwebtokens)
+```
+// Get all users from the data base that are under the user who is currently logged in (done with jsonwebtokens)
 router.get('/', auth, function(req, res) {
   console.log(req.userData)
   Contact.find({owner: req.userData.userId})
@@ -135,11 +136,13 @@ router.delete('/:id', auth, function(req, res) {
       message: err
     })
   })
-})```
+})
+```
 
 ## User API Route Calls
 
-```// Retrieves all users stored in the database
+```
+// Retrieves all users stored in the database
 router.get('/', function(req, res) {
   User.find()
   .exec()
@@ -228,11 +231,13 @@ router.delete('/:id', function(req, res) {
   .catch(err => {
       res.status(500).json(err)
   })
-})```
+})
+```
 
 ## User API Model
 
-```const userSchema = mongoose.Schema({
+```
+const userSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   username: {
     type: String,
@@ -244,11 +249,13 @@ router.delete('/:id', function(req, res) {
     required: true,
     unique: true
   }
-})```
+})
+```
 
 ## Contact API Model
 
-```const contactSchema = mongoose.Schema({
+```
+const contactSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   name: {
     type: String,
@@ -271,4 +278,5 @@ router.delete('/:id', function(req, res) {
     required: true,
     unique: false
   }
-})```
+})
+```
