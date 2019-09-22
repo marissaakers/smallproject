@@ -14,7 +14,7 @@ import AddContactConfirmation from './pages/addcontactconfirmation'
 
 import SearchContactsResult from './pages/searchContactsResult'
 
-
+// Maps out every URL that has a component and links that URL with corresponding component
 function App() {
   return (
     <div className="App">
