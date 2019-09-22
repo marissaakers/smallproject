@@ -6,7 +6,6 @@ import { Link, Redirect } from 'react-router-dom'
 class AddContact extends Component {
   constructor(props) {
     super(props)
-    //console.log(this.props.location.state.jwt)
     this.state = {
       name: '',
       number: '',
@@ -125,12 +124,6 @@ class AddContact extends Component {
               <Button variant="primary" onClick={(e) => this.onSubmit()} >
                 Submit
               </Button>
-
-              <Button variant="primary" onClick={(e) => this.onSubmit()} >
-                Submit
-              </Button>
-             {this.state.showName && <p>{this.state.name + ' created...'}</p>}
-
             </div>
             <div>
               <Link to={{

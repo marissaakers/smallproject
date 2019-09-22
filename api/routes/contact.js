@@ -12,7 +12,7 @@ router.get('/', auth, function(req, res) {
   .populate('owner', 'username')
   .exec()
   .then(contacts => {
-    res.status(200).json(contacts)
+    res.status(200).json({contacts: contacts})
   })
   .catch(err => {
     res.status(500).json(err)

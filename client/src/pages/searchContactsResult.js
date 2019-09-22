@@ -13,6 +13,7 @@ class SearchContactsResult extends Component {
       redirect: false,
       contactList: [ {} ]
     }
+    // this.parseResult()
   }
 
   parseResult = () => {
