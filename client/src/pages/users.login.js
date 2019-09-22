@@ -21,17 +21,20 @@ class Login extends Component {
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
   }
 
+// Will set a variable to true when component is fully mounted
   componentDidMount() {
     this.mounted = true
   }
 
+// Sets username in state to be whatever the user is typing
   handleUsernameChange = (e) => {
     this.setState({
       username: e.target.value
     })
     console.log(this.state.username)
   }
-
+  
+// Sets password in state to be whatever the user is typing
   handlePasswordChange = (e) => {
     this.setState({
       password: e.target.value
@@ -39,6 +42,8 @@ class Login extends Component {
     console.log(this.state.password)
   }
 
+// Send the state to the api, receives data back and displays that data, JSON WEB TOKEN is given back to us to allow
+// user to access needed routes
   postAndFetchData = (path) => {
     fetch('http://localhost:3000/' + path , {
       method: "POST",
@@ -75,15 +80,19 @@ class Login extends Component {
       })
   }
 
+// Calls the postAndFetch function when submit button is clicked
   onSubmit = (e) => {
     this.postAndFetchData('users/login')
   }
-
+  
+// Prepares page to be redirected
   setRedirect = () => {
     this.setState({
       redirect: true
     })
   }
+  
+  // Tells component where to redirect to
   renderRedirect = () => {
     if (this.state.redirect) {
       //console.log('THE STATE: ' + this.state.jwt)
@@ -93,7 +102,8 @@ class Login extends Component {
       }}/>
     }
   }
-
+  
+// Sets variable to false when ready to leave page
   componentWillUnmount() {
     this.mounted = false
   }
