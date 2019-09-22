@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Form, FormControl, FormGroup, FormLabel } from 'react-bootstrap/'
 import { Button } from 'react-bootstrap/'
 import { Redirect } from 'react-router-dom'
+import signuplit from './signup_lit.png'
+
+console.log(signuplit);
 
 class SignUp extends Component {
 
@@ -17,7 +20,7 @@ class SignUp extends Component {
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
   }
 
-  
+
 
   handleUsernameChange = (e) => {
     this.setState({
@@ -45,11 +48,11 @@ class SignUp extends Component {
       return response.text()
     })
     .then((data) => {
-      this.setState({response: data}) 
+      this.setState({response: data})
       console.log('state: ' + this.state.response)
     })
     .then(() => {this.setRedirect()})
-  } 
+  }
 
   setRedirect = () => {
     this.setState({
@@ -65,7 +68,7 @@ class SignUp extends Component {
   render() {
     return(
       <div >
-        <h1 style={{margin: '5%'}}>Sign Up</h1>
+        <input type="image" src={signuplit} width = "700"/>
         <div style={styling.outerDiv}>
         <Form style={styling.formDiv}>
           <FormGroup>
