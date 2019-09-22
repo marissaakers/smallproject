@@ -16,12 +16,14 @@ class SearchContactsResult extends Component {
     // this.parseResult()
   }
 
+  // Parses state being sent in from search component, returns the array of contacts
   parseResult = () => {
     let parsed = JSON.parse(this.state.result)
     console.log('parsed '+parsed.contacts)
     return parsed.contacts
   }
 
+  // Maps out the array to be displayed and rendered, if the array is empty it will alret the user
   mapResult = () => {
     let arr = this.parseResult()
     if(arr.length == 0) {
@@ -41,6 +43,7 @@ class SearchContactsResult extends Component {
     )
   }
   
+  // Displays format of page and styling
   render() {
     console.log()
     return(

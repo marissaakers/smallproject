@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+// Page that returns when URL given is not linked to a component
+
 class NotFound extends Component {
   render() {
     return(

@@ -18,10 +18,12 @@ class SignUp extends Component {
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
   }
 
+  // Will set a variable to true when component is fully mounted
   componentDidMount() {
     this.mounted = true
   }
 
+  // Sets username in state to be whatever the user is typing
   handleUsernameChange = (e) => {
     this.setState({
       username: e.target.value
@@ -29,6 +31,7 @@ class SignUp extends Component {
     console.log(this.state.username)
   }
 
+  // Sets password in state to be whatever the user is typing
   handlePasswordChange = (e) => {
     this.setState({
       password: e.target.value
@@ -36,6 +39,9 @@ class SignUp extends Component {
     console.log(this.state.password)
   }
 
+  // Send the state to the api, receives data back and displays that data, if user tries to signup with a username already
+  // in the database, will not let user continue and alert user that the username already exists, will happen when
+  // user clicks submit button
   onSubmit = (e) => {
     fetch('http://localhost:3000/users/signup' , {
     method: "POST",
@@ -60,16 +66,19 @@ class SignUp extends Component {
     .catch()
   } 
 
+  // Tells component where to redirect to
   renderRedirect = () => {
     if (this.state.redirect) {
       return <Redirect to='/users/login' />
     }
   }
 
+  // Sets variable to false when ready to leave page
   componentWillUnmount() {
     this.mounted = false
   }
 
+  // Displays format of page and styling
   render() {
     return(
       <div >

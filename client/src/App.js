@@ -9,12 +9,11 @@ import AddContact from './pages/addContact'
 import Search from './pages/search'
 import ShowContact from './pages/showContact'
 import NotFound from './pages/notFound'
-
 import AddContactConfirmation from './pages/addcontactconfirmation'
-
 import SearchContactsResult from './pages/searchContactsResult'
 
 
+// Maps out every URL that has a component and links that URL with corresponding component
 function App() {
   return (
     <div className="App">
