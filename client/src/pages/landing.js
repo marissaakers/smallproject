@@ -21,8 +21,8 @@ class Landing extends Component {
       <div> <img src={logo} width = "800"/> </div>
 
       <div style={styling.buttonDiv}>
-        <Link to="/users/signup"><input type="image" src={signuplogo} width = "700"/></Link>
-        <Link to="/users/login"><input type="image" src={loginlogo} width = "700"/></Link>
+        <Link to="/users/signup"><input type="image" src={signuplogo} width = "600"/></Link>
+        <Link to="/users/login"><input type="image" src={loginlogo} width = "600"/></Link>
       </div>
     </div>
     )
