@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Form, FormControl, FormGroup, FormLabel } from 'react-bootstrap/'
 import { Button } from 'react-bootstrap/'
 import { Redirect } from 'react-router-dom'
+import loginlit from './loginlit.png'
+
+console.log(loginlit);
 
 class Login extends Component {
   constructor(props) {
@@ -66,7 +69,7 @@ class Login extends Component {
     if (this.state.redirect) {
       //console.log('THE STATE: ' + this.state.jwt)
       return <Redirect to={{
-        pathname: '/users/dashboard', 
+        pathname: '/users/dashboard',
         state: { jwt: this.state.jwt }
       }}/>
     }
@@ -75,7 +78,7 @@ class Login extends Component {
   render() {
     return(
       <div >
-        <h1 style={{margin: '5%'}}>Login</h1>
+        <input type="image" src={loginlit} width = "700"/>
         <div style={styling.outerDiv}>
           <Form style={styling.formDiv}>
             <FormGroup>
