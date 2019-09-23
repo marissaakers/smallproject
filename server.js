@@ -21,7 +21,8 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 // Allows front-end and api to talk to eachother
 app.use(cors())
-
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'client/public')));
 app.use('/users', userRouter)
 app.use('/contacts', contactRouter)
 
