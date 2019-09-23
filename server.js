@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const path = require('path');
 const cors = require('cors')
-
+const PORT = process.env.PORT || 5000;
 const userRouter = require('./routes/user')
 const contactRouter = require('./routes/contact')
 
@@ -32,5 +32,8 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 
+app.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}`)
+})
 
 module.exports = app
