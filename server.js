@@ -16,9 +16,6 @@ try{
   console.log(error)
 }
 
-// ... other app.use middleware 
-app.use(express.static(path.join(__dirname, "client", "build")))
-
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 // Allows front-end and api to talk to eachother
