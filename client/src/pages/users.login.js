@@ -95,7 +95,6 @@ class Login extends Component {
   // Tells component where to redirect to
   renderRedirect = () => {
     if (this.state.redirect) {
-      //console.log('THE STATE: ' + this.state.jwt)
       return <Redirect to={{
         pathname: '/users/dashboard',
         state: { jwt: this.state.jwt }
@@ -108,6 +107,12 @@ class Login extends Component {
     this.mounted = false
   }
 
+  // Sets variable to false when ready to leave page
+  componentWillUnmount() {
+    this.mounted = false
+  }
+
+  // Displays format of page and styling
   render() {
     return(
       <div >

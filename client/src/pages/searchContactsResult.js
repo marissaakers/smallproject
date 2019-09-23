@@ -51,7 +51,7 @@ class SearchContactsResult extends Component {
     </div>
     )
   }
-
+  
   // Displays format of page and styling
   render() {
     console.log()
