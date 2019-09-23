@@ -20,7 +20,7 @@ class ShowContact extends Component {
   }
 
   postAndFetchData = (path) => {
-    fetch('http://localhost:3000/' + path , {
+    fetch('http://localhost:5000/' + path , {
       headers: {
         'Content-type': 'application/json',
         'Authorization': 'Bearer ' + this.state.jwt

@@ -49,7 +49,7 @@ class SignUp extends Component {
 // in the database, will not let user continue and alert user that the username already exists, will happen when
 // user clicks submit button
   onSubmit = (e) => {
-    fetch('http://localhost:3000/users/signup' , {
+    fetch('http://localhost:5000/users/signup' , {
     method: "POST",
     headers: {
       'Content-type': 'application/json'

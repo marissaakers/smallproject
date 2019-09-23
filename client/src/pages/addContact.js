@@ -48,7 +48,7 @@ class AddContact extends Component {
   }
 
   postAndFetchData = (path) => {
-    fetch('http://localhost:3000/' + path , {
+    fetch('http://localhost:5000/' + path , {
       method: "POST",
       headers: {
         'Content-type': 'application/json',
