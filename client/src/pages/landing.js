@@ -19,6 +19,7 @@ console.log(logout);
 class Landing extends Component {
   render() {
     return(
+      <input type="image" src={logout} width = "300"/>
       <div style={styling.mainDiv} >
 
       <div> <img src={logo} width = "800"/> </div>
