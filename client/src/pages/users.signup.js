@@ -49,27 +49,30 @@ class SignUp extends Component {
 // in the database, will not let user continue and alert user that the username already exists, will happen when
 // user clicks submit button
   onSubmit = (e) => {
-    fetch('http://localhost:5000/users/signup' , {
-    method: "POST",
-    headers: {
-      'Content-type': 'application/json'
-    },
-    body: JSON.stringify(this.state)
-    })
-    .then((response) => {
-      console.log(response.status)
-      if((response.status == 200 || response.status == 201) && this.mounted == true) {
-        this.setState({redirect: true})
-        return response.text()
-      } else if ((response.status == 401 || response.status == 400 || response.status == 500 ) && this.mounted == true) {
-        console.log('hit else if')
-        return this.setState({
-          redirect: false,
-          result: 'Username already exists.'
-        })
-      }
-    })
-    .catch()
+    try{
+      fetch('http://localhost:5000/users/signup' , {
+      method: "POST",
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify(this.state)
+      })
+      .then((response) => {
+        console.log(response.status)
+        if((response.status == 200 || response.status == 201) && this.mounted == true) {
+          this.setState({redirect: true})
+          return response.text()
+        } else if ((response.status == 401 || response.status == 400 || response.status == 500 ) && this.mounted == true) {
+          console.log('hit else if')
+          return this.setState({
+            redirect: false,
+            result: 'Username already exists.'
+          })
+        }
+      })
+    }catch(e) {
+      console.log("Yeah there was an error fam.")
+    }
   }
 
 // Tells component where to redirect to
