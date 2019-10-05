@@ -25,7 +25,7 @@ class Dashboard extends Component {
     return(
       <div>
       <div style = {styling.header}>
-        <Link to="/"><input type="logout" src={logout} width = "300"/></Link>
+        <Link to="/"><input type="logout" src={logout} width = "200"/></Link>
       </div>
 
       <div style={styling.mainDiv} >
@@ -60,7 +60,6 @@ const styling = {
   },
   
   header: {
-    padding: '60px',
     textAlign: "right"
   },
   add: {
