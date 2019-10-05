@@ -24,7 +24,7 @@ class Dashboard extends Component {
   render() {
     return(
       <div>
-      <div class = "header">
+      <div style = {styling.header}>
         <Link to="/"><input type="logout" src={logout} width = "300"/></Link>
       </div>
 
@@ -52,17 +52,16 @@ class Dashboard extends Component {
   }
 }
 
-.header {
-  padding: 60px;
-  text-align: center;
-  background: #1abc9c;
-  color: white;
-  font-size: 30px;
-}
+
 
 const styling = {
   mainDiv: {
     textAlign: 'center'
+  },
+  
+  header: {
+    padding: '60px',
+    textAlign: "right"
   },
   add: {
     marginLeft: '50%',
