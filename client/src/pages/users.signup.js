@@ -56,7 +56,7 @@ class SignUp extends Component {
       headers: {
         'Content-type': 'application/json',
         'Access-Control-Allow-Origin': '*'
-      },
+      }, "mode" : "no-cors",
       body: JSON.stringify(this.state)
       })
       .then((response) => {
