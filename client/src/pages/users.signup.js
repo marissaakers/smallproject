@@ -4,6 +4,7 @@ import { Button } from 'react-bootstrap/'
 import { Redirect } from 'react-router-dom'
 import signuplit from './images/signup_lit.png'
 import submitbutton from './images/submit.png'
+import { accessSync } from 'fs';
 
 console.log(signuplit);
 console.log(submitbutton);
@@ -53,7 +54,8 @@ class SignUp extends Component {
       fetch('http://localhost:5000/users/signup' , {
       method: "POST",
       headers: {
-        'Content-type': 'application/json'
+        'Content-type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
       },
       body: JSON.stringify(this.state)
       })
