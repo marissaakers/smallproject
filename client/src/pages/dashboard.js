@@ -25,7 +25,7 @@ class Dashboard extends Component {
     return(
       <div>
       <div style = {styling.header}>
-        <Link to="/"><input type="logout" src={logout} width = "200"/></Link>
+        <Link to="/"><input type="image" src={logout} width = "200"/></Link>
       </div>
 
       <div style={styling.mainDiv} >
@@ -56,6 +56,7 @@ class Dashboard extends Component {
 
 const styling = {
   mainDiv: {
+    top: '-60px',
     textAlign: 'center'
   },
   
