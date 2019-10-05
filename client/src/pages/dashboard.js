@@ -23,7 +23,7 @@ class Dashboard extends Component {
   }
   render() {
     return(
-      <div class "header">
+      <div class = "header">
         <Link to="/"><input type="logout" src={logout} width = "300"/></Link>
       </div>
 
