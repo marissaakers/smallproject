@@ -34,7 +34,7 @@ class Search extends Component {
 
 // Send the state to the api, receives data back and displays that data
   postAndFetchData = (path) => {
-    fetch('http://localhost:5000/' + path , {
+    fetch('http:/157.230.185.190' + path , {
       method: "POST",
       headers: {
         'Content-type': 'application/json',
