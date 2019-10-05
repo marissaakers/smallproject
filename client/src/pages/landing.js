@@ -13,6 +13,7 @@ console.log(signuplogo);
 console.log(signuplit);
 console.log(loginlit);
 
+
 // Set up landing page with two buttons that will link user to either the signup page or the login page
 class Landing extends Component {
   render() {
@@ -31,14 +32,13 @@ class Landing extends Component {
 }
 
 // Styling the component
+
 const styling = {
   mainDiv: {
     background: '#0f0524',
     textAlign: 'center'
   },
   buttons: {
-
-
   },
   signup: {
 
