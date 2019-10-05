@@ -51,7 +51,7 @@ class SignUp extends Component {
 // user clicks submit button
   onSubmit = (e) => {
     try{
-      fetch('http:/users/signup' , {
+      fetch('http:/' + '/users/signup' , {
       method: "POST",
       headers: {
         'Content-type': 'application/json',
