@@ -6,12 +6,14 @@ import signuplogo from './images/signupdim.png';
 import loginlogo from './images/logindim.png';
 import signuplit from './images/signup_lit.png'
 import loginlit from './images/loginlit.png'
+import logout from './images/logout.png'
 
 console.log(logo);
 console.log(loginlogo);
 console.log(signuplogo);
 console.log(signuplit);
 console.log(loginlit);
+console.log(logout);
 
 // Set up landing page with two buttons that will link user to either the signup page or the login page
 class Landing extends Component {
