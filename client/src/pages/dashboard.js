@@ -5,12 +5,13 @@ import plus from './images/addround.png'
 import showcontacts from './images/list.png'
 import magnifier from './images/search.png'
 import logo from './images/rybamatransparent.png'
+import logout from './images/logout.png'
 
 console.log(plus);
 console.log(showcontacts);
 console.log(magnifier);
 console.log(logo);
-
+console.log(logout);
 
 class Dashboard extends Component {
   constructor(props) {
@@ -22,6 +23,10 @@ class Dashboard extends Component {
   }
   render() {
     return(
+      <div class "header">
+        <Link to="/"><input type="logout" src={logout} width = "300"/></Link>
+      </div>
+
       <div style={styling.mainDiv} >
       <div> <img src={logo} width = "800"/> </div>
       <div style={styling.buttonDiv}>
@@ -43,6 +48,14 @@ class Dashboard extends Component {
     </div>
     )
   }
+}
+
+.header {
+  padding: 60px;
+  text-align: center;
+  background: #1abc9c;
+  color: white;
+  font-size: 30px;
 }
 
 const styling = {
