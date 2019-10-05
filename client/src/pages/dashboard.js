@@ -23,6 +23,7 @@ class Dashboard extends Component {
   }
   render() {
     return(
+      <div>
       <div class = "header">
         <Link to="/"><input type="logout" src={logout} width = "300"/></Link>
       </div>
@@ -45,6 +46,7 @@ class Dashboard extends Component {
           state: { jwt: this.state.jwt }
         }}><input type="image" src={magnifier} width = "400"/></Link>
       </div>
+    </div>
     </div>
     )
   }
