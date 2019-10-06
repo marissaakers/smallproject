@@ -45,7 +45,7 @@ class Login extends Component {
 // Send the state to the api, receives data back and displays that data, JSON WEB TOKEN is given back to us to allow
 // user to access needed routes
   postAndFetchData = (path) => {
-    fetch('http:/' + ':8080'+ path , {
+    fetch('http:/' + ':8080/'+ path , {
       method: "POST",
       headers: {
         'Content-type': 'application/json'
